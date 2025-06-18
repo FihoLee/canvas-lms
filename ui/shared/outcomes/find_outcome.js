@@ -144,8 +144,10 @@ $('#find_outcome_criterion_dialog .outcomes_select').click(function (event) {
   const $outcomeEl = $('#find_outcome_criterion_dialog .outcomes_list .outcome_' + id)
   if ($(this).hasClass('selected_side_tab')) {
     $outcomeEl.show()
+    console.log("THIS IS ALL CAPS TO MAKE IT STAND OUT 1")
   } else {
     $outcomeEl.hide()
+    console.log("THIS IS ALL CAPS TO MAKE IT STAND OUT 2")
   }
 })
 $('#find_outcome_criterion_dialog .select_outcome_link').click(function (event) {
@@ -155,6 +157,7 @@ $('#find_outcome_criterion_dialog .select_outcome_link').click(function (event) 
   $dialog.dialog('close')
   if ($.isFunction(find_outcome.callback)) {
     find_outcome.callback($outcomes)
+    console.log("THIS IS ALL CAPS TO MAKE IT STAND OUT 3")
   }
 })
 })
