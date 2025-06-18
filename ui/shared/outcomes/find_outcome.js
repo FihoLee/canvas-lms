@@ -137,24 +137,26 @@ const find_outcome = (function () {
 })()
 window.find_outcome = find_outcome
 $(document).ready(function () {
-  $('#find_outcome_criterion_dialog .outcomes_select').click(function (event) {
-    event.preventDefault()
-    $('#find_outcome_criterion_dialog .outcomes_select.selected_side_tab').removeClass(
-      'selected_side_tab',
-    )
-    $(this).addClass('selected_side_tab')
-    const id = $(this).getTemplateData({textValues: ['id']}).id
-    $('#find_outcome_criterion_dialog .outcomes_list .outcome').hide()
-    $('#find_outcome_criterion_dialog .outcomes_list .outcome_' + id).show()
-  })
-  $('#find_outcome_criterion_dialog .select_outcome_link').click(function (event) {
-    event.preventDefault()
-    const $outcome = $(this).parents('.outcome')
-    $('#find_outcome_criterion_dialog').dialog('close')
-    if ($.isFunction(find_outcome.callback)) {
-      find_outcome.callback($outcome)
-    }
-  })
+$('#find_outcome_criterion_dialog .outcomes_select').click(function (event) {
+  event.preventDefault()
+  $(this).toggleClass('selected_side_tab')
+  const id = $(this).getTemplateData({textValues: ['id']}).id
+  const $outcomeEl = $('#find_outcome_criterion_dialog .outcomes_list .outcome_' + id)
+  if ($(this).hasClass('selected_side_tab')) {
+    $outcomeEl.show()
+  } else {
+    $outcomeEl.hide()
+  }
+})
+$('#find_outcome_criterion_dialog .select_outcome_link').click(function (event) {
+  event.preventDefault()
+  const $dialog = $('#find_outcome_criterion_dialog')
+  const $outcomes = $dialog.find('.outcome:visible')
+  $dialog.dialog('close')
+  if ($.isFunction(find_outcome.callback)) {
+    find_outcome.callback($outcomes)
+  }
+})
 })
 
 export default find_outcome
